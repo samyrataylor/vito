@@ -53,7 +53,7 @@ class AllocateNetworkBlock
     ): string {
         $existing = $existingCidrs->filter()->values()->all();
         $memberSubnets = $this->memberSubnets($memberServers);
-        $blocklist = $pool === NetworkAddressingPool::RFC1918 ? self::BLOCKLIST : [];
+        $blocklist = $pool === NetworkAddressingPool::RFC1918 ? array_merge(self::BLOCKLIST, config('network.allocate.blocklist', [])) : [];
 
         foreach ($this->supernets($pool) as $supernet) {
             $candidate = $this->scan($supernet, $blockPrefix, $existing, $memberSubnets, $blocklist);
