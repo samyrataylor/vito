@@ -181,8 +181,16 @@ class CreateNetwork
                 'nullable',
                 Rule::in([NetworkAddressingPool::CGNAT->value, NetworkAddressingPool::RFC1918->value]),
             ];
-            $rules['prefix'] = ['nullable', 'integer', 'min:16', 'max:28'];
-            $rules['port'] = ['nullable', 'integer', 'min:1024', 'max:65535'];
+
+            $rules['prefix'] = config(
+                'network.validation_rules.prefix',
+                ['nullable', 'integer', 'min:16', 'max:28']
+            );
+
+            $rules['port'] = config(
+                'network.validation_rules.port',
+                ['nullable', 'integer', 'min:1024', 'max:65535']
+            );
         }
 
         if (($input['type'] ?? null) === NetworkType::CUSTOM->value) {
