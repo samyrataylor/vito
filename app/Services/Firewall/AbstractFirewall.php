@@ -9,7 +9,7 @@ abstract class AbstractFirewall extends AbstractService implements Firewall
 {
     protected function createBasicFirewallRules(): void
     {
-        $this->service->server->firewallRules()->createMany([
+        $this->service->server->firewallRules()->createMany(config('ufw.basic_rules', [
             [
                 'type' => 'allow',
                 'name' => 'SSH',
@@ -37,7 +37,7 @@ abstract class AbstractFirewall extends AbstractService implements Firewall
                 'mask' => null,
                 'status' => FirewallRuleStatus::READY,
             ],
-        ]);
+        ]));
         info('rules created');
     }
 }
