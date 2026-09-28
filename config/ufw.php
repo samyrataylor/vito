@@ -10,7 +10,7 @@ return [
             'protocol' => 'tcp',
             'port' => '22',
             'source' => env('FIREWALL_SSH_SOURCE'),
-            'mask' => (empty(env('FIREWALL_SSH_SOURCE')) ? null : empty(env('FIREWALL_SSH_SOURCE_MASK')) ? '/32' : env('FIREWALL_SSH_SOURCE_MASK')),
+            'mask' => (empty(env('FIREWALL_SSH_SOURCE')) ? null : (empty(env('FIREWALL_SSH_SOURCE_MASK')) ? '/32' : env('FIREWALL_SSH_SOURCE_MASK'))),
             'status' => FirewallRuleStatus::READY,
         ],
         [
